@@ -1,0 +1,11 @@
+9b8ddec121469ec1cd19934bd791f7e4 *DESCRIPTION
+2e9c2c3db65f447ffe52ef28262f0097 *NAMESPACE
+653831b8694b4a2d78d5c4cfebe56aa3 *R/CalculatePower.R
+a7e0f4c3caea760e4cf2ae5a8a8c13a4 *R/CalculateSampleSize.R
+73d1d4bae423aed7d791b2557c0d38ca *R/PlotExpectAvail.R
+36a8aafe7943aa57cdc3eea6abf3e015 *R/PlotProximalEffect.R
+655a4a4e9dd467baebcc0426aab3574c *R/internal.R
+5ca667e4ed2f75ab3629a9618205e526 *man/calculatePower.Rd
+b35c5f89b92b4c6641f5bef3d2ef1e3c *man/calculateSampleSize.Rd
+6466b9febf32b452f561304599f0120d *man/plotExpectAvail.Rd
+5dc1d19c0278a4f36304426c69a4901a *man/plotProximalEffect.Rd
