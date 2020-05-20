@@ -4,9 +4,21 @@
 \alias{calculateSampleSize}
 \title{Calculate sample size for micro-randomized trials}
 \usage{
-calculateSampleSize(days, occ_per_day, prob, beta_shape, beta_mean,
-  beta_initial, beta_quadratic_max, tau_shape, tau_mean, tau_initial,
-  tau_quadratic_max, power, sigLev)
+calculateSampleSize(
+  days,
+  occ_per_day,
+  prob,
+  beta_shape,
+  beta_mean,
+  beta_initial,
+  beta_quadratic_max,
+  tau_shape,
+  tau_mean,
+  tau_initial,
+  tau_quadratic_max,
+  power,
+  sigLev
+)
 }
 \arguments{
 \item{days}{Duration of the study.}
@@ -105,4 +117,3 @@ calculateSampleSize(days=28,
 Seewald, N.J.; Sun, J.; Liao, P. "MRT-SS Calculator: An R Shiny Application for Sample Size
 Calculation in Micro-Randomized Trials". arXiv:1609.00695
 }
-

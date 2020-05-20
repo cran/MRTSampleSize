@@ -179,6 +179,8 @@ calculateSampleSize <- function(days,occ_per_day,prob,
   p_input <- 3
   if(beta_shape == "constant"){
     p_input <- 1
+  } else if(beta_shape == "linear"){
+    p_input <- 2
   }
   ### We assume that the proximal treatment effect is consant on each day ###
   for(k in 1:days)

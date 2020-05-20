@@ -4,9 +4,21 @@
 \alias{calculatePower}
 \title{Calculate power for micro-randomized trials}
 \usage{
-calculatePower(days, occ_per_day, prob, beta_shape, beta_mean, beta_initial,
-  beta_quadratic_max, tau_shape, tau_mean, tau_initial, tau_quadratic_max,
-  sample_size, sigLev)
+calculatePower(
+  days,
+  occ_per_day,
+  prob,
+  beta_shape,
+  beta_mean,
+  beta_initial,
+  beta_quadratic_max,
+  tau_shape,
+  tau_mean,
+  tau_initial,
+  tau_quadratic_max,
+  sample_size,
+  sigLev
+)
 }
 \arguments{
 \item{days}{Duration of the study.}
@@ -106,4 +118,3 @@ mHealth by Liao et al. (2016) <DOI:10.1002/sim.6847>.
 Seewald, N.J.; Sun, J.; Liao, P. "MRT-SS Calculator: An R Shiny Application for Sample Size
 Calculation in Micro-Randomized Trials". arXiv:1609.00695
 }
-

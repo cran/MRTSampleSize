@@ -4,8 +4,14 @@
 \alias{plotExpectAvail}
 \title{plot the graph for the expected availability}
 \usage{
-plotExpectAvail(days, occ_per_day, tau_shape, tau_mean, tau_initial,
-  tau_quadratic_max)
+plotExpectAvail(
+  days,
+  occ_per_day,
+  tau_shape,
+  tau_mean,
+  tau_initial,
+  tau_quadratic_max
+)
 }
 \arguments{
 \item{days}{Duration of the study.}
@@ -50,4 +56,3 @@ when the pattern for the expected availability is constant, linear or quadractic
 
 
 }
-

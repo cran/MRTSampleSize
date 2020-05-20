@@ -4,8 +4,14 @@
 \alias{plotProximalEffect}
 \title{plot the graph for the proximal treatment effect}
 \usage{
-plotProximalEffect(days, occ_per_day, beta_shape, beta_mean, beta_initial,
-  beta_quadratic_max)
+plotProximalEffect(
+  days,
+  occ_per_day,
+  beta_shape,
+  beta_mean,
+  beta_initial,
+  beta_quadratic_max
+)
 }
 \arguments{
 \item{days}{Duration of the study.}
@@ -51,4 +57,3 @@ plotProximalEffect(days=42,
 
 
 }
-
