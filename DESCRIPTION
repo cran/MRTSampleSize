@@ -1,26 +1,23 @@
 Package: MRTSampleSize
-Type: Package
 Title: A Sample Size Calculator for Micro-Randomized Trials
-Version: 0.2.0
+Version: 0.3.0
 Authors@R: c(
-    person("Liying","Huang", email = "lxh37@psu.edu", role = c("aut","cre")),
+    person("Peng","Liao", email = "pengliao@umich.edu", role =c("aut","cre")),
+    person("Liying","Huang", email = "lxh37@psu.edu", role = "aut"),
     person("Nicholas J.","Seewald", email = "nseewald@umich.edu", role = "aut"),
-    person("Peng","Liao", email = "pengliao@umich.edu", role ="aut"),
     person("Ji","Sun", email = "sunji@umich.edu", role ="aut"))
 Depends: R (>= 2.15.0)
-Copyright: The Pennsylvania State University
-Description: Provide a sample size calculator for micro-randomized
-    trials (MRTs) based on methodology developed in Sample Size Calculations for
-    Micro-randomized Trials in mHealth by Liao et al. (2016) <DOI:10.1002/sim.6847>.
+Copyright: The Pennsylvania State University (07.25.2020 - 09.01.2020),
+        Harvard University (09.01.2020 - present)
+Description: Provide a sample size calculator for micro-randomized trials (MRTs) based on methodology developed in Sample Size Calculations for Micro-randomized Trials in mHealth by Liao et al. (2016) <DOI:10.1002/sim.6847>.
 License: GPL (>= 2)
-LazyData: TRUE
-RoxygenNote: 7.1.0
+Maintainer: Peng Liao <pengliao@umich.edu>
+RoxygenNote: 7.1.1
 NeedsCompilation: no
-Packaged: 2020-05-20 13:19:36 UTC; admin_lxh37
-Author: Liying Huang [aut, cre],
+Packaged: 2020-09-12 20:26:42 UTC; Peng
+Author: Peng Liao [aut, cre],
+  Liying Huang [aut],
   Nicholas J. Seewald [aut],
-  Peng Liao [aut],
   Ji Sun [aut]
-Maintainer: Liying Huang <lxh37@psu.edu>
 Repository: CRAN
-Date/Publication: 2020-05-20 13:30:02 UTC
+Date/Publication: 2020-09-13 13:00:09 UTC

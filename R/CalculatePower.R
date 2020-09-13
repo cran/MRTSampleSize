@@ -4,9 +4,9 @@
 #' based on methodology developed in Sample Size Calculations for Micro-randomized Trials in
 #' mHealth by Liao et al. (2016) <DOI:10.1002/sim.6847>.
 #'
-#' @param days Duration of the study.
-#' @param occ_per_day Number of decision time points per day.
-#' @param prob Randomization probability, i.e. the probability of assigning the treatment at a decision time
+#' @param days The duration of the study.
+#' @param occ_per_day The number of decision time points per day.
+#' @param prob The randomization probability, i.e. the probability of assigning the treatment at a decision time
 #'             point. This can be constant, or time-varying probabilities can be specified by a vector
 #'             specifying randomization probabilities for each day or decision time.
 #' @param beta_shape The trend for the proximal treatment effect, choices are constant, linear or quadratic.
@@ -25,10 +25,10 @@
 #'              trend.
 #'  }
 #'
-#' @param beta_mean Average of proximal treatment effect.
-#' @param beta_initial Initial value of proximal treatment effect when beta_shape is linear or quadratic.
-#' @param beta_quadratic_max Day of maximal proximal treatment effect when beta_shape is quadratic.
-#' @param tau_shape The pattern for expected availability, choices are constant, linear or quadratic.
+#' @param beta_mean The average of proximal treatment effect.
+#' @param beta_initial The initial value of proximal treatment effect when beta_shape is linear or quadratic.
+#' @param beta_quadratic_max The day of maximal proximal treatment effect when beta_shape is quadratic.
+#' @param tau_shape The pattern for expected availability; choices can be constant, linear or quadratic.
 #' Note:
 #'  \enumerate{
 #'              \item{Constant} The expected availability stays constant over the study.
@@ -42,13 +42,14 @@
 #'              input values of initial and average availability.
 #'  }
 #'
-#' @param tau_mean Average of expected availability.
-#' @param tau_initial Initial Value of expected availability when tau_shape is linear or quadratic.
-#' @param tau_quadratic_max Changing point of availability when tau_shape is quadratic.
-#' @param sample_size Number of participants
-#' @param sigLev Significance level
+#' @param tau_mean The average of expected availability.
+#' @param tau_initial The initial Value of expected availability when tau_shape is linear or quadratic.
+#' @param tau_quadratic_max The changing point of availability when tau_shape is quadratic.
+#' @param dimB The number of parameters used in the main/average effect of proximal outcome
+#' @param sample_size The number of participants
+#' @param sigLev The significance level or type I error rate.
 #'
-#' @return power.
+#' @return The achieved power given the input sample size
 #'
 #' @export calculatePower
 #' @references Seewald, N.J.; Sun, J.; Liao, P. "MRT-SS Calculator: An R Shiny Application for Sample Size
@@ -65,6 +66,7 @@
 #'                    tau_mean=0.5,
 #'                    tau_initial=0.7,
 #'                    tau_quadratic_max=42,
+#'                    dimB=3,
 #'                    sample_size=40,
 #'                    sigLev=0.05)
 #'
@@ -80,25 +82,30 @@
 #'                    tau_mean=0.5,
 #'                    tau_initial=0.7,
 #'                    tau_quadratic_max=42,
+#'                    dimB=3,
 #'                    sample_size=40,
 #'                    sigLev=0.05)#'
 #'
 
 calculatePower <- function(days,occ_per_day,prob,
                            beta_shape,beta_mean,beta_initial,beta_quadratic_max,
-                           tau_shape,tau_mean,tau_initial,tau_quadratic_max,
+                           tau_shape,tau_mean,tau_initial,tau_quadratic_max,dimB,
                            sample_size,sigLev){
 
   if(sample_size != round(sample_size)){
-    stop("Error: Please enter integer value for Number of Participants")
+
+    stop("Error: Please enter integer value for the number of participants (sample_size)")
+
   }
   if(sample_size <= 0){
-    stop("Error: Please specify Number of Participants greater than 0")
+
+    stop("Error: Please specify the number of participants (sample_size) greater than 0")
+
   }
 
   validateParameters(days,occ_per_day,prob,
                      beta_shape,beta_mean,beta_initial,beta_quadratic_max,
-                     tau_shape,tau_mean,tau_initial,tau_quadratic_max,
+                     tau_shape,tau_mean,tau_initial,tau_quadratic_max,dimB,
                      sigLev)
 
 
@@ -113,35 +120,48 @@ calculatePower <- function(days,occ_per_day,prob,
 
   p_input <- 3
   if(beta_shape == "constant"){
+
     p_input <- 1
+
   } else if(beta_shape == "linear"){
+
     p_input <- 2
-  }
-  ### We assume that the proximal treatment effect is consant on each day ###
-  for(k in 1:days)
-  {
-    input_effect[(occ_per_day*k-occ_per_day+1):(occ_per_day*k)] = replicate(occ_per_day, beta_input[k])
+
   }
 
-  ### We assume that the expected availability is constant on each day ###
-  for(k in 1:days)
-  {
+  ### We assume that the proximal treatment effect is consant on each day ###
+  for(k in 1:days){
+
+    input_effect[(occ_per_day*k-occ_per_day+1):(occ_per_day*k)] = replicate(occ_per_day, beta_input[k])
+
+  }
+
+
+  for(k in 1:days){
+
     input_avail[(occ_per_day*k-occ_per_day+1):(occ_per_day*k)] = replicate(occ_per_day, tau_input[k])
+
   }
 
   if(length(prob) == 1 || length(prob) == days || length(prob) == days*occ_per_day){
 
-    power <- PowerCalculation(days, occ_per_day, sample_size, input_effect, input_avail, delta = prob, alpha0=sigLev, p=p_input, q=3)
+    power <- PowerCalculation(days, occ_per_day, sample_size, input_effect, input_avail, delta = prob, alpha0=sigLev, p=p_input, q=dimB)
 
     if(power >= 0.5){
+
       print(sprintf("The power is %5.2f%s with sample size %3d when the significance level is %4.2f.", power*100,"%",sample_size,sigLev))
+
     }else{
+
       ### if the calculated power is less than 50%, output an warning ###
       print(sprintf("The power is less than 50%s with sample size %3d when the significance level is %4.2f.","%", sample_size, sigLev))
+
     }
 
   }else{
+
     print(paste("Parameter Prob has wrong length!"))
+
   }
   return(power)
 

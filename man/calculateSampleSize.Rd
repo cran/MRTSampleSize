@@ -16,20 +16,21 @@ calculateSampleSize(
   tau_mean,
   tau_initial,
   tau_quadratic_max,
+  dimB,
   power,
   sigLev
 )
 }
 \arguments{
-\item{days}{Duration of the study.}
+\item{days}{The duration of the study.}
 
-\item{occ_per_day}{Number of decision time points per day.}
+\item{occ_per_day}{The number of decision time points per day.}
 
-\item{prob}{Randomization probability, i.e. the probability of assigning the treatment at a decision time
+\item{prob}{The randomization probability, i.e. the probability of assigning the treatment at a decision time
 point. This can be constant, or time-varying probabilities can be specified by by a vector
 specifying randomization probabilities for each day or decision time.}
 
-\item{beta_shape}{The trend for the proximal treatment effect, choices are constant, linear or quadratic.
+\item{beta_shape}{The trend for the proximal treatment effect; choices are constant, linear or quadratic.
 Note:
  \enumerate{
              \item{Constant} The proximal treatment effect stays constant over the study.
@@ -45,13 +46,13 @@ Note:
              trend.
  }}
 
-\item{beta_mean}{Average of proximal treatment effect.}
+\item{beta_mean}{The average of proximal treatment effect.}
 
-\item{beta_initial}{Initial value of proximal treatment effect when beta_shape is linear or quadratic.}
+\item{beta_initial}{The initial value of proximal treatment effect when beta_shape is linear or quadratic.}
 
 \item{beta_quadratic_max}{Day of maximal proximal treatment effect when beta_shape is quadratic.}
 
-\item{tau_shape}{The pattern for expected availability, choices are constant, linear or quadratic.
+\item{tau_shape}{The pattern for expected availability; choices are constant, linear or quadratic.
 Note:
  \enumerate{
              \item{Constant} The expected availability stays constant over the study.
@@ -65,18 +66,20 @@ Note:
              input values of initial and average availability.
  }}
 
-\item{tau_mean}{Average of expected availability.}
+\item{tau_mean}{The average of expected availability.}
 
-\item{tau_initial}{Initial Value of expected availability when tau_shape is linear or quadratic.}
+\item{tau_initial}{The initial Value of expected availability when tau_shape is linear or quadratic.}
 
-\item{tau_quadratic_max}{Changing point of availability when tau_shape is quadratic.}
+\item{tau_quadratic_max}{The changing point of availability when tau_shape is quadratic.}
 
-\item{power}{power}
+\item{dimB}{The number of parameters used in the main/average effect of proximal outcome.}
 
-\item{sigLev}{Significance level}
+\item{power}{The desired power to achieve.}
+
+\item{sigLev}{The significance level or type I error rate.}
 }
 \value{
-Sample size.
+The minimal sample size to achieve the desired power.
 }
 \description{
 This function calculates the sample size for micro-randomized trials (MRTs)
@@ -95,6 +98,7 @@ calculateSampleSize(days=42,
                     tau_mean=0.5,
                     tau_initial=0.7,
                     tau_quadratic_max=42,
+                    dimB=3,
                     power=0.8,
                     sigLev=0.05)
 
@@ -110,6 +114,7 @@ calculateSampleSize(days=28,
                     tau_mean=0.5,
                     tau_initial=0.7,
                     tau_quadratic_max=42,
+                    dimB=3,
                     power=0.8,
                     sigLev=0.05)
 }

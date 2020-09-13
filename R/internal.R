@@ -111,7 +111,7 @@ generateTau <- function(days,occ_per_day,tau_shape,tau_mean,tau_initial,tau_quad
 
 validateParameters <- function(days,occ_per_day,prob,
                                beta_shape,beta_mean,beta_initial,beta_quadratic_max,
-                               tau_shape,tau_mean,tau_initial,tau_quadratic_max,
+                               tau_shape,tau_mean,tau_initial,tau_quadratic_max,dimB,
                                sigLev){
 
   if(days != round(days)){
@@ -147,6 +147,12 @@ validateParameters <- function(days,occ_per_day,prob,
     {
       stop("Error: The provided randomization probability is less than 0 for one or more decision times.")
     }
+  }
+
+  if(!((dimB == as.integer(dimB)) & (dimB > 0))){
+
+    stop("Error: Please specify the parameters in the main effect to be a positive integer")
+
   }
 
   if(sigLev < 0){
@@ -281,20 +287,6 @@ SampleSize <- function(days, occ_per_day, beta_t, tau, delta, alpha0, beta0, p, 
 
   N.all <- c(10:Nmax);
 
-
-  # power.all <- sapply(N.all, function(n) PowerCal(p,q,n,d,sigma.beta,alpha0))
-  #
-  # if(all(power.all < beta0)){
-  #
-  #   stop(paste("Cannot attain",beta0,"power when sample size is below", N.try));
-  #
-  # }else{
-  #
-  #   opt.index <- which(power.all>=beta0)[1]
-  #   N <- N.all[opt.index]
-  #
-  # }
-
   N <- Nmax
   for( k in N.all){
     power <- PowerCal(p,q,k,d,beta,alpha0)
@@ -305,7 +297,9 @@ SampleSize <- function(days, occ_per_day, beta_t, tau, delta, alpha0, beta0, p, 
   }
 
   if(N == Nmax){
+
     stop(paste("Cannot attain",beta0,"power when sample size is below", Nmax))
+
   }
 
   return(N)
